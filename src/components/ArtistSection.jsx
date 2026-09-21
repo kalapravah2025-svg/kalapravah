@@ -16,7 +16,7 @@ export default function ArtistSection({ onContactArtist }) {
           </h2>
           <div className="w-16 h-[2.5px] bg-[#C87A38] mx-auto rounded-full mt-1.5" />
           <p className="text-sm sm:text-base text-[#5C5652] leading-relaxed max-w-2xl mx-auto font-light pt-1">
-            Rashmi Dhar — Traditional Madhubani practitioner, workshop facilitator, and founder of Kalapravah, dedicated to keeping Madhubani heritage vibrant.
+            Rashmi Dhar - Traditional Madhubani practitioner, workshop facilitator, and founder of Kalapravah, dedicated to keeping Madhubani heritage vibrant.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export default function ArtistSection({ onContactArtist }) {
               </p>
 
               <p className="text-sm sm:text-base lg:text-lg text-[#332F2C] leading-relaxed font-light">
-                Her primary mediums are acrylics and natural pigments on handmade paper and canvas. Through her creative space, she founded the art initiative—<strong>Kalapravah</strong>—where she strives to keep this living heritage vibrant and thriving.
+                Her primary mediums are acrylics and natural pigments on handmade paper and canvas. Through her creative space, she founded the art initiative, <strong>Kalapravah</strong>, where she strives to keep this living heritage vibrant and thriving.
               </p>
             </div>
 
@@ -84,7 +84,7 @@ export default function ArtistSection({ onContactArtist }) {
 
               <div className="space-y-3 text-sm sm:text-base lg:text-lg text-[#44403C] font-serif leading-relaxed font-normal">
                 <p className="not-italic">
-                  Art is meant to be shared, which is why a vital part of her journey involves conducting hands-on Madhubani workshops. She designs these sessions especially for the younger generation and busy modern minds—providing a peaceful sanctuary away from screens and offering a calming, therapeutic space to unwind, reset, and find joy.
+                  Art is meant to be shared, which is why a vital part of her journey involves conducting hands-on Madhubani workshops. She designs these sessions especially for the younger generation and busy modern minds, providing a peaceful sanctuary away from screens and offering a calming, therapeutic space to unwind, reset, and find joy.
                 </p>
               </div>
             </div>

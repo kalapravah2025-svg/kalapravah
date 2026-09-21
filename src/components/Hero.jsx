@@ -150,7 +150,7 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
             {/* LEFT COLUMN: NARRATIVE (lg:col-span-7) */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
               <p className="text-sm sm:text-base text-[#5C5652] leading-relaxed font-light">
-                Kalapravah translates to the continuous flow of art. This venture is more than a collection of paintings—it is a sacred bridge connecting our rich civilizational roots with the modern world.
+                Kalapravah translates to the continuous flow of art. This venture is more than a collection of paintings - it is a sacred bridge connecting our rich civilizational roots with the modern world.
               </p>
               
               <p className="text-sm sm:text-base text-[#5C5652] leading-relaxed font-light">

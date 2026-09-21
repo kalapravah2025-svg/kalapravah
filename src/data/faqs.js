@@ -55,7 +55,7 @@ export const FAQS = [
     id: "faq-workshops-beginner",
     category: "Workshops & Learning",
     question: "I am a complete beginner. Can I join your workshops?",
-    answer: "Our workshops are designed for all skill levels—no prior drawing experience is needed. We guide you gently through every line, stroke, and filling technique.",
+    answer: "Our workshops are designed for all skill levels - no prior drawing experience is needed. We guide you gently through every line, stroke, and filling technique.",
     keywords: ["beginner madhubani workshop", "art workshop for beginners", "learn folk art without experience", "madhubani painting classes for beginners"]
   },
   {
@@ -94,7 +94,7 @@ export const FAQS = [
     id: "faq-care-framing-preservation",
     category: "Orders, Shipping & Care",
     question: "How should I frame, clean, and preserve an original painting on handmade paper?",
-    answer: "Always frame behind UV-protective glass with a 1.5–2 inch acid-free window mat board so the paper never touches the glass directly. Hang the piece in a dry, well-ventilated area away from direct relentless sunlight and damp exterior walls. Lightly dust the outer frame glass with a microfiber cloth; never apply water or chemical cleaning sprays to the artwork.",
+    answer: "Always frame behind UV-protective glass with a 1.5-2 inch acid-free window mat board so the paper never touches the glass directly. Hang the piece in a dry, well-ventilated area away from direct relentless sunlight and damp exterior walls. Lightly dust the outer frame glass with a microfiber cloth; never apply water or chemical cleaning sprays to the artwork.",
     keywords: ["how to preserve Madhubani painting", "framing handmade paper art", "care instructions folk painting", "UV glass framing for art"]
   },
   {
@@ -130,7 +130,7 @@ export const FAQS = [
     id: "faq-decor-modern-homes",
     category: "Home Decor & Styling",
     question: "How do I style traditional Madhubani art in modern, contemporary homes?",
-    answer: "Madhubani paintings pair effortlessly with contemporary, Scandinavian, and Japandi interiors. Because of their intricate monochrome linework (Kachni) or warm mineral hues (Bharni), they create a grounded, authentic focal point against neutral off-white, beige, or charcoal walls. Place a statement piece above a low credenza, sofa, or dining console, complemented by warm accent lighting (2700K–3000K), natural wood furniture, and linen textures.",
+    answer: "Madhubani paintings pair effortlessly with contemporary, Scandinavian, and Japandi interiors. Because of their intricate monochrome linework (Kachni) or warm mineral hues (Bharni), they create a grounded, authentic focal point against neutral off-white, beige, or charcoal walls. Place a statement piece above a low credenza, sofa, or dining console, complemented by warm accent lighting (2700K - 3000K), natural wood furniture, and linen textures.",
     keywords: ["Madhubani painting home decor", "styling Indian folk art modern home", "Madhubani art interior design", "traditional art contemporary spaces"]
   },
   {
@@ -162,7 +162,7 @@ export const FAQS = [
     id: "faq-art-unique-heritage",
     category: "Madhubani & Indian Art",
     question: "What makes Madhubani painting distinct from other Indian folk art traditions?",
-    answer: "Unlike Warli (defined by white-on-ochre stick figures) or Gond (celebrated for its patterned dot fills), Madhubani art is distinguished by signature double-line contour framing, micro-hatching line work, and 'Horror Vacui'—the philosophical avoidance of empty space where every corner is filled with living flora and fauna. Originating in ancient Bihar during the Ramayana era, it remains one of the world's oldest continuous women-led living traditions.",
+    answer: "Unlike Warli (defined by white-on-ochre stick figures) or Gond (celebrated for its patterned dot fills), Madhubani art is distinguished by signature double-line contour framing, micro-hatching line work, and 'Horror Vacui', the philosophical avoidance of empty space where every corner is filled with living flora and fauna. Originating in ancient Bihar during the Ramayana era, it remains one of the world's oldest continuous women-led living traditions.",
     keywords: ["difference between Madhubani and Warli", "unique features of Madhubani art", "Indian folk art comparison", "what is special about Madhubani painting"]
   },
   {

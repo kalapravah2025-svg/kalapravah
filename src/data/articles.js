@@ -31,7 +31,7 @@ export const ARTIST_FEATURE = {
       Her primary mediums are acrylics and natural pigments on handmade paper and canvas.
     </p>
     <p class="mb-6 text-[#44403C] leading-relaxed">
-      Through her creative space, she founded the art initiative—<strong>Kalapravah</strong>—where she strives to keep this living heritage vibrant and thriving.
+      Through her creative space, she founded the art initiative, <strong>Kalapravah</strong>, where she strives to keep this living heritage vibrant and thriving.
     </p>
 
     <blockquote class="border-l-2 border-[#C87A38] pl-6 py-2 my-8 italic font-serif text-lg text-[#1C1917] bg-[#FAF8F3]/60 rounded-r-md">
