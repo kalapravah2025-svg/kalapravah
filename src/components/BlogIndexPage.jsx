@@ -28,7 +28,7 @@ export default function BlogIndexPage() {
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    canonical.href = 'https://kalapravah.art/blog';
+    canonical.href = 'https://www.kalapravah.in/blog';
 
     // Inject JSON-LD Schema for Blog Index
     const schemaData = {
@@ -36,7 +36,7 @@ export default function BlogIndexPage() {
       "@type": "Blog",
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://kalapravah.art/blog"
+        "@id": "https://www.kalapravah.in/blog"
       },
       "name": "Kalapravah Folk Art Journal & Blog",
       "description": "Authentic research, guides, and stories on traditional Madhubani art by Rashmi Dhar.",
@@ -45,7 +45,7 @@ export default function BlogIndexPage() {
         "name": "Kalapravah Madhubani Art Gallery",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://kalapravah.art/images/logo-emblem.png"
+          "url": "https://www.kalapravah.in/images/logo-emblem.png"
         }
       }
     };

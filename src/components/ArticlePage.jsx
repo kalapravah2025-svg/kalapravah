@@ -39,7 +39,7 @@ export default function ArticlePage() {
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    canonical.href = `https://kalapravah.art/blog/${article.id}`;
+    canonical.href = `https://www.kalapravah.in/blog/${article.id}`;
 
     // 4. Inject JSON-LD Schema for Google & AI Search Indexers
     const schemaData = {
@@ -47,11 +47,11 @@ export default function ArticlePage() {
       "@type": "BlogPosting",
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://kalapravah.art/blog/${article.id}`
+        "@id": `https://www.kalapravah.in/blog/${article.id}`
       },
       "headline": article.title,
       "description": article.excerpt || article.subtitle,
-      "image": `https://kalapravah.art${article.image}`,
+      "image": `https://www.kalapravah.in${article.image}`,
       "author": {
         "@type": "Person",
         "name": article.author || "Rashmi Dhar"
@@ -61,7 +61,7 @@ export default function ArticlePage() {
         "name": "Kalapravah Madhubani Art Gallery",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://kalapravah.art/images/logo-emblem.png"
+          "url": "https://www.kalapravah.in/images/logo-emblem.png"
         }
       },
       "datePublished": article.date,
