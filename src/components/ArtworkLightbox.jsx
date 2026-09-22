@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { 
-  X, Sparkles, Feather, MessageSquare, Frame, ZoomIn, Image as ImageIcon 
+  X, Sparkles, Feather, MessageSquare 
 } from 'lucide-react';
 
 export default function ArtworkLightbox({ artwork, onClose, _onOpenCommission }) {
-  const [viewMode, setViewMode] = useState('framed'); // 'framed' | 'scan' | 'room'
-
-  // Reset to framed view on artwork change
-  useEffect(() => {
-    setViewMode('framed');
-  }, [artwork?.id]);
-
   // Keyboard navigation & close on Escape
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -58,12 +51,7 @@ export default function ArtworkLightbox({ artwork, onClose, _onOpenCommission })
     );
   }
 
-  const activeImageSrc = 
-    viewMode === 'framed'
-      ? (artwork.framedImage || artwork.originalImage || artwork.image)
-      : viewMode === 'scan'
-        ? (artwork.originalImage || artwork.image)
-        : (artwork.image || artwork.originalImage);
+  const activeImageSrc = artwork.framedImage || artwork.originalImage || artwork.image;
 
   return (
     <div 
@@ -100,77 +88,18 @@ export default function ArtworkLightbox({ artwork, onClose, _onOpenCommission })
         <div className="grid grid-cols-1 lg:grid-cols-12 flex-grow">
           
           {/* Left Column: Museum Gallery Presentation */}
-          <div className="lg:col-span-6 p-2.5 xs:p-3 sm:p-5 md:p-6 bg-gradient-to-b from-[#F3EDE2] via-[#EFE8DC] to-[#E5DECE] flex flex-col justify-between items-center border-b lg:border-b-0 lg:border-r border-[#E7E0D2] relative select-none min-h-[260px] xs:min-h-[300px] sm:min-h-[420px] lg:min-h-[520px] overflow-hidden">
+          <div className="lg:col-span-6 p-2 xs:p-3 sm:p-4 md:p-5 bg-gradient-to-b from-[#F3EDE2] via-[#EFE8DC] to-[#E5DECE] flex items-center justify-center border-b lg:border-b-0 lg:border-r border-[#E7E0D2] relative select-none overflow-hidden min-h-[220px] xs:min-h-[260px] sm:min-h-[380px] lg:min-h-[480px]">
             
             {/* Subtle Gallery Overhead Spotlight Glow */}
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-4/5 h-44 bg-[#FFFDF5]/40 blur-2xl rounded-full pointer-events-none" />
 
-            {/* View Mode Toggle Pill Bar */}
-            <div className="relative z-20 flex items-center gap-1 bg-[#FAF8F3]/90 backdrop-blur-md p-1 rounded-full border border-[#D5CABB] shadow-sm mb-3">
-              <button
-                type="button"
-                onClick={() => setViewMode('framed')}
-                className={`px-3 py-1 text-[10px] xs:text-[11px] font-semibold tracking-wider uppercase rounded-full flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'framed'
-                    ? 'bg-[#1C1917] text-[#FAF8F3] shadow-sm'
-                    : 'text-[#6B6560] hover:text-[#1C1917] hover:bg-black/5'
-                }`}
-              >
-                <Frame className="w-3 h-3 text-[#C87A38]" />
-                <span>Framed View</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setViewMode('scan')}
-                className={`px-3 py-1 text-[10px] xs:text-[11px] font-semibold tracking-wider uppercase rounded-full flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'scan'
-                    ? 'bg-[#1C1917] text-[#FAF8F3] shadow-sm'
-                    : 'text-[#6B6560] hover:text-[#1C1917] hover:bg-black/5'
-                }`}
-              >
-                <ZoomIn className="w-3 h-3 text-[#C87A38]" />
-                <span>Authentic Canvas</span>
-              </button>
-
-              {artwork.image && (
-                <button
-                  type="button"
-                  onClick={() => setViewMode('room')}
-                  className={`hidden sm:flex px-3 py-1 text-[10px] xs:text-[11px] font-semibold tracking-wider uppercase rounded-full items-center gap-1.5 transition-all cursor-pointer ${
-                    viewMode === 'room'
-                      ? 'bg-[#1C1917] text-[#FAF8F3] shadow-sm'
-                      : 'text-[#6B6560] hover:text-[#1C1917] hover:bg-black/5'
-                  }`}
-                >
-                  <ImageIcon className="w-3 h-3 text-[#C87A38]" />
-                  <span>Room Setting</span>
-                </button>
-              )}
-            </div>
-
-            {/* Artwork Display Container */}
-            <div className="relative z-10 w-full flex-grow flex items-center justify-center p-1 sm:p-2">
+            {/* Framed Artwork Display Container */}
+            <div className="relative z-10 w-full flex items-center justify-center p-1 sm:p-1.5">
               <img
                 src={activeImageSrc}
-                alt={`${artwork.title} - ${viewMode}`}
-                className={`max-h-[36vh] xs:max-h-[42vh] sm:max-h-[54vh] lg:max-h-[66vh] w-auto max-w-full object-contain select-none pointer-events-none transition-all duration-300 ${
-                  viewMode === 'framed'
-                    ? 'rounded-sm drop-shadow-[0_16px_28px_rgba(28,25,23,0.30)]'
-                    : viewMode === 'scan'
-                      ? 'rounded shadow-md border border-[#C4B9A3]/50 bg-[#FFFDF9]'
-                      : 'rounded-lg shadow-xl border border-[#C4B9A3]/60'
-                }`}
+                alt={artwork.title}
+                className="max-h-[36vh] xs:max-h-[42vh] sm:max-h-[56vh] lg:max-h-[70vh] w-auto max-w-full object-contain select-none pointer-events-none rounded-sm drop-shadow-[0_16px_28px_rgba(28,25,23,0.30)] transition-all duration-300"
               />
-            </div>
-
-            {/* Exhibition Subtitle Plaque */}
-            <div className="relative z-10 mt-2 text-center">
-              <span className="inline-block text-[10px] xs:text-[11px] text-[#78716C] font-mono tracking-wider bg-[#FAF8F3]/80 px-2.5 py-0.5 rounded-full border border-[#E7E0D2]">
-                {viewMode === 'framed' && 'Handcrafted Walnut Moulding • Beveled Ivory Mat'}
-                {viewMode === 'scan' && 'Authentic Handmade Paper Scan • Original Penwork'}
-                {viewMode === 'room' && 'Gallery Wall Setting'}
-              </span>
             </div>
 
           </div>
