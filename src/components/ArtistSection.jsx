@@ -1,7 +1,7 @@
 import React from 'react';
 import { MessageSquare, Quote, MapPin } from 'lucide-react';
 
-export default function ArtistSection({ onContactArtist }) {
+export default function ArtistSection({ _onContactArtist }) {
   return (
     <section id="artist" className="pt-5 sm:pt-7 lg:pt-8 pb-7 sm:pb-9 lg:pb-10 bg-transparent relative overflow-hidden border-b border-[#E7E0D2] scroll-mt-20 sm:scroll-mt-24">
       {/* Soft Decorative Ambient Spotlights */}
@@ -31,6 +31,8 @@ export default function ArtistSection({ onContactArtist }) {
                 <img
                   src="/images/rashmi_dhar.jpg"
                   alt="Rashmi Dhar at IGNCA, New Delhi"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1C1917]/80 via-transparent to-transparent opacity-95 flex flex-col justify-end p-3.5 sm:p-5 text-white">

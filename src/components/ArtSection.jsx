@@ -62,10 +62,10 @@ export default function ArtSection({ onSelectArtwork }) {
                 className="w-full h-auto object-contain block group-hover:scale-[1.02] transition-transform duration-700"
               />
 
-              {/* Hover Pill Hint */}
-              <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
-                <span className="text-[11px] font-medium text-white bg-[#1C1917]/85 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 shadow-xs">
-                  Click to inspect
+              {/* Inspection Pill Hint (always visible on touch screens, hover on desktop) */}
+              <div className="absolute bottom-2.5 right-2.5 xs:bottom-3 xs:right-3 transition-opacity opacity-90 sm:opacity-0 sm:group-hover:opacity-100">
+                <span className="text-[10px] xs:text-[11px] font-medium text-white bg-[#1C1917]/85 backdrop-blur-md px-2.5 xs:px-3 py-1 rounded-full border border-white/20 shadow-sm">
+                  Tap to inspect
                 </span>
               </div>
             </div>

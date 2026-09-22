@@ -7,7 +7,7 @@ import React from 'react';
  */
 export default function MadhubaniFolkBackground() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none w-full h-full">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none w-full h-full gpu-accelerated">
       
       {/* 1. SOFT TRANSLUCENT PARCHMENT VEIL OVERLAY FOR TEXT READABILITY */}
       <div className="absolute inset-0 bg-[#FAF8F3]/55 z-10" />
@@ -16,7 +16,8 @@ export default function MadhubaniFolkBackground() {
       <img
         src="/images/artwork_sphere_surya_chandra.jpg"
         alt="Madhubani Surya Chandra Canvas Background"
-        className="absolute inset-0 w-full h-full object-cover object-center scale-108 sm:scale-110 opacity-[0.14] mix-blend-multiply z-0"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover object-center scale-108 sm:scale-110 opacity-[0.14] mix-blend-multiply z-0 pointer-events-none"
       />
 
     </div>

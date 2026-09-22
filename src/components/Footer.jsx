@@ -91,6 +91,8 @@ export default function Footer({ onNavigate }) {
                   <img 
                     src="/images/logo-footer.png" 
                     alt="Kalapravah Logo" 
+                    loading="lazy"
+                    decoding="async"
                     className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-xl" 
                   />
                 </div>
@@ -102,12 +104,12 @@ export default function Footer({ onNavigate }) {
               </div>
 
               {/* Navigation Index Links */}
-              <div className="flex flex-wrap gap-2.5 xs:gap-4 pt-1">
+              <div className="flex flex-wrap gap-1.5 xs:gap-2.5 sm:gap-3.5 pt-1">
                 {indexLinks.map((link) => (
                   <button
                     key={link.id}
                     onClick={() => handleLinkClick(link.id)}
-                    className="text-xs font-semibold tracking-widest text-[#D98A48] hover:text-white uppercase transition-colors cursor-pointer py-1.5 px-1 min-h-[36px] flex items-center"
+                    className="text-xs font-semibold tracking-widest text-[#D98A48] hover:text-white uppercase transition-colors cursor-pointer py-1.5 px-1.5 min-h-[40px] flex items-center active:scale-95"
                   >
                     {link.label}
                   </button>

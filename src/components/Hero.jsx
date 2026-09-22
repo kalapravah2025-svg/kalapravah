@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Sparkles, 
-  Feather, 
-  Layers, 
-  ShieldCheck,
-  ChevronDown
+  Sparkles
 } from 'lucide-react';
 import LunarGravityCard from './ui/lunar-gravity-card';
 
@@ -32,14 +28,57 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = React.useRef(0);
+  const touchStartY = React.useRef(0);
+  const isSwiping = React.useRef(false);
 
-  // Auto-changing slideshow every 3 seconds
+  // Auto-changing slideshow every 3 seconds (pauses when user interacts)
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % decorHeroSlides.length);
-    }, 3000);
+    }, 3200);
     return () => clearInterval(timer);
-  }, [decorHeroSlides.length]);
+  }, [decorHeroSlides.length, isPaused]);
+
+  // Touch Swipe Handlers for Mobile / Tablets
+  const handleTouchStart = (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isSwiping.current = true;
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isSwiping.current || !e.touches || !e.touches[0]) return;
+    const diffX = touchStartX.current - e.touches[0].clientX;
+    const diffY = touchStartY.current - e.touches[0].clientY;
+    // If predominantly horizontal swipe, prevent accidental vertical page pull
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+      if (e.cancelable) e.preventDefault();
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!isSwiping.current) return;
+    isSwiping.current = false;
+    const endX = e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : touchStartX.current;
+    const diffX = touchStartX.current - endX;
+
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        // Swiped Left -> Next Slide
+        setCurrentSlide((prev) => (prev + 1) % decorHeroSlides.length);
+      } else {
+        // Swiped Right -> Previous Slide
+        setCurrentSlide((prev) => (prev - 1 + decorHeroSlides.length) % decorHeroSlides.length);
+      }
+    }
+    // Resume auto-rotation after brief delay
+    setTimeout(() => setIsPaused(false), 2000);
+  };
 
   return (
     <section id="home" className="w-full relative overflow-hidden border-b border-[#E7E0D2]">
@@ -47,7 +86,14 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
       {/* ========================================================================= */}
       {/* 1. FULL-BLEED 100VW SLIDESHOW HERO BANNER                                */}
       {/* ========================================================================= */}
-      <div className="relative w-full h-[88dvh] xs:h-[90dvh] sm:h-screen min-h-[500px] xs:min-h-[540px] sm:min-h-[580px] md:min-h-[620px] flex items-center justify-center text-center overflow-hidden">
+      <div 
+        className="relative w-full h-[84svh] xs:h-[88svh] sm:h-screen min-h-[460px] xs:min-h-[500px] sm:min-h-[580px] md:min-h-[620px] flex items-center justify-center text-center overflow-hidden select-none"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         
         {/* Full-Bleed 100% Background Slideshow with Horizontal Swipe Left Animation */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -55,7 +101,7 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
             className="flex w-full h-full transition-transform duration-1000 ease-in-out"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
-            {decorHeroSlides.map((slide) => (
+            {decorHeroSlides.map((slide, idx) => (
               <div
                 key={slide.id}
                 className="w-full h-full shrink-0 relative"
@@ -63,6 +109,8 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
                 <img
                   src={slide.bgImage}
                   alt={slide.title}
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
               </div>
@@ -74,50 +122,54 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
         </div>
 
         {/* OVERLAID CENTERED HERO CONTENT */}
-        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 space-y-5 sm:space-y-8">
+        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 xs:pt-10 sm:pt-12 space-y-4 xs:space-y-5 sm:space-y-8">
           
           {/* Centered High-Impact Headline */}
-          <div className="space-y-2.5 xs:space-y-3">
-            <h1 className="font-serif text-2xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15] drop-shadow-xl text-center">
-              Traditional Elegance <br className="hidden xs:inline" />
+          <div className="space-y-2 xs:space-y-3">
+            <h1 className="font-serif text-2xl xxs:text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15] drop-shadow-xl text-center">
+              Traditional Elegance <br className="hidden xxs:inline" />
               For <span className="font-serif italic font-normal text-[#F59E0B]">Contemporary</span> Spaces
             </h1>
           </div>
 
           {/* Centered Narrative Subtitle */}
-          <p className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto text-center drop-shadow-md">
+          <p className="text-xs xxs:text-[13px] xs:text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto text-center drop-shadow-md px-1">
             Bringing ancient storytelling of traditional <strong className="font-semibold text-white">Madhubani folk art</strong> directly into modern living spaces.
           </p>
 
           {/* Centered Action Buttons */}
-          <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 xs:pt-3 sm:pt-4 w-full max-w-xs xs:max-w-none mx-auto">
+          <div className="flex flex-col xs:flex-row items-center justify-center gap-2.5 xs:gap-3 sm:gap-4 pt-1 xs:pt-3 sm:pt-4 w-full max-w-xs xs:max-w-none mx-auto">
             <button
               onClick={onExploreArtworks}
-              className="w-full xs:w-auto text-center px-5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-transparent hover:bg-white/15 text-white border-2 border-white/80 hover:border-white text-[11px] sm:text-xs font-bold tracking-widest uppercase transition-all shadow-lg cursor-pointer hover:scale-105 active:scale-95 whitespace-nowrap min-h-[44px]"
+              className="w-full xs:w-auto text-center px-5 sm:px-7 py-3 sm:py-3.5 rounded-full bg-transparent hover:bg-white/15 text-white border-2 border-white/80 hover:border-white text-[10.5px] xs:text-[11px] sm:text-xs font-bold tracking-widest uppercase transition-all shadow-lg cursor-pointer hover:scale-105 active:scale-95 whitespace-nowrap min-h-[44px]"
             >
               EXPLORE ART GALLERY
             </button>
 
             <button
               onClick={onExploreArtist}
-              className="w-full xs:w-auto text-center px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#C87A38] hover:bg-[#b56929] text-white text-[11px] sm:text-xs font-bold tracking-widest uppercase transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer border border-[#C87A38] whitespace-nowrap min-h-[44px]"
+              className="w-full xs:w-auto text-center px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#C87A38] hover:bg-[#b56929] text-white text-[10.5px] xs:text-[11px] sm:text-xs font-bold tracking-widest uppercase transition-all shadow-2xl hover:scale-105 active:scale-95 cursor-pointer border border-[#C87A38] whitespace-nowrap min-h-[44px]"
             >
               ABOUT THE ARTIST
             </button>
           </div>
 
-          {/* Subtle Slide Indicator Bars at Bottom */}
-          <div className="pt-3 sm:pt-4 flex justify-center">
-            <div className="flex items-center gap-2">
+          {/* Subtle Slide Indicator Bars at Bottom with Comfortable Hit Targets */}
+          <div className="pt-2 sm:pt-4 flex justify-center">
+            <div className="flex items-center gap-1.5 xs:gap-2">
               {decorHeroSlides.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === currentSlide ? 'w-6 bg-white/90 shadow-sm' : 'w-1.5 bg-white/30 hover:bg-white/60'
-                  }`}
+                  className="p-1.5 cursor-pointer group"
                   aria-label={`Go to slide ${idx + 1}`}
-                />
+                >
+                  <span
+                    className={`block h-1.5 rounded-full transition-all duration-300 ${
+                      idx === currentSlide ? 'w-6 xs:w-7 bg-white/95 shadow-sm' : 'w-2 bg-white/40 group-hover:bg-white/70'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -163,7 +215,7 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
               
               {/* Circular Background Container */}
               <div className="relative">
-                <div className="w-[210px] h-[210px] xs:w-[250px] xs:h-[250px] sm:w-[300px] sm:h-[300px] lg:w-[340px] lg:h-[340px] max-w-[calc(100vw-2.5rem)] max-h-[calc(100vw-2.5rem)] rounded-full bg-[#FFFDF9] border-2 border-[#C87A38]/40 shadow-2xl relative overflow-hidden flex items-center justify-center">
+                <div className="w-[185px] h-[185px] xxs:w-[220px] xxs:h-[220px] xs:w-[260px] xs:h-[260px] sm:w-[300px] sm:h-[300px] lg:w-[340px] lg:h-[340px] max-w-[calc(100vw-2.5rem)] max-h-[calc(100vw-2.5rem)] rounded-full bg-[#FFFDF9] border-2 border-[#C87A38]/40 shadow-2xl relative overflow-hidden flex items-center justify-center">
                   <LunarGravityCard
                     className="w-full h-full"
                     artTextureUrl="/images/artwork_sphere_surya_chandra.jpg"
@@ -174,9 +226,9 @@ export default function Hero({ onExploreArtworks, onExploreArtist }) {
               </div>
 
               {/* High-Contrast Editorial Caption Card */}
-              <div className="bg-[#FFFDF9] border border-[#E7E0D2] shadow-lg rounded-2xl px-3.5 sm:px-6 py-2.5 sm:py-3.5 max-w-xs xs:max-w-sm mx-auto flex items-center justify-center gap-2.5 sm:gap-3 backdrop-blur-md transition-all hover:border-[#C87A38]">
-                <Sparkles className="w-5 h-5 text-[#C87A38] shrink-0" />
-                <p className="text-xs sm:text-sm text-[#1C1917] font-serif italic leading-relaxed text-center font-normal">
+              <div className="bg-[#FFFDF9] border border-[#E7E0D2] shadow-lg rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3.5 w-full max-w-[calc(100vw-2.5rem)] xs:max-w-sm mx-auto flex items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 backdrop-blur-md transition-all hover:border-[#C87A38]">
+                <Sparkles className="w-4 h-4 xs:w-5 xs:h-5 text-[#C87A38] shrink-0" />
+                <p className="text-[11px] xxs:text-xs sm:text-sm text-[#1C1917] font-serif italic leading-relaxed text-center font-normal">
                   In Madhubani folklore, celestial bodies like the <strong className="text-[#C87A38] not-italic font-bold">Sun, Moon, and Stars</strong> represent cosmic balance.
                 </p>
               </div>

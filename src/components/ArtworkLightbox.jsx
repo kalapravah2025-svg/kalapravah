@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { 
-  X, Sparkles, Feather, CheckCircle, MessageSquare 
+  X, Sparkles, Feather, MessageSquare 
 } from 'lucide-react';
 
-export default function ArtworkLightbox({ artwork, onClose, onOpenCommission }) {
+export default function ArtworkLightbox({ artwork, onClose, _onOpenCommission }) {
   // Keyboard navigation & close on Escape
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -52,8 +52,14 @@ export default function ArtworkLightbox({ artwork, onClose, onOpenCommission }) 
   }
 
   return (
-    <div className="fixed inset-0 bg-[#1C1917]/85 backdrop-blur-md z-50 flex items-center justify-center p-2 xs:p-3 sm:p-4 md:p-6 overflow-y-auto">
-      <div className="bg-[#FAF8F3] border border-[#C4B9A3] w-full max-w-5xl max-h-[92dvh] sm:max-h-[90vh] rounded-xl shadow-2xl overflow-y-auto relative my-auto flex flex-col touch-scroll">
+    <div 
+      className="fixed inset-0 bg-[#1C1917]/85 backdrop-blur-md z-50 flex items-center justify-center p-2 xs:p-3 sm:p-4 md:p-6 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div 
+        className="bg-[#FAF8F3] border border-[#C4B9A3] w-full max-w-5xl max-h-[92dvh] sm:max-h-[90vh] rounded-xl shadow-2xl overflow-y-auto relative my-auto flex flex-col touch-scroll"
+        onClick={(e) => e.stopPropagation()}
+      >
         
         {/* Top Header Bar */}
         <div className="sticky top-0 z-40 bg-[#FAF8F3]/95 backdrop-blur-sm border-b border-[#E7E0D2] px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between shrink-0">

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ARTWORKS } from '../data/artworks';
-import { GalleryVertical, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 export default function ArtGallerySection({ onSelectArtwork }) {
   const [filterStyle, setFilterStyle] = useState('All');
-  const [isHovered, setIsHovered] = useState(false);
   const [scrollPos, setScrollPos] = useState(0);
 
-  const [isDragging, setIsDragging] = useState(false);
   const [hasDraggedFar, setHasDraggedFar] = useState(false);
 
   const [isHoldingLeft, setIsHoldingLeft] = useState(false);
@@ -124,7 +122,6 @@ export default function ArtGallerySection({ onSelectArtwork }) {
     lastMouseXRef.current = e.touches[0].clientX;
     touchDirectionRef.current = null;
     isDraggingRef.current = false;
-    setIsDragging(false);
     setHasDraggedFar(false);
   };
 
@@ -140,12 +137,10 @@ export default function ArtGallerySection({ onSelectArtwork }) {
         if (diffX > diffY) {
           touchDirectionRef.current = 'horizontal';
           isDraggingRef.current = true;
-          setIsDragging(true);
           lastMouseXRef.current = currentX;
         } else {
           touchDirectionRef.current = 'vertical';
           isDraggingRef.current = false;
-          setIsDragging(false);
           return;
         }
       } else {
@@ -166,7 +161,6 @@ export default function ArtGallerySection({ onSelectArtwork }) {
 
   const handleTouchEnd = () => {
     isDraggingRef.current = false;
-    setIsDragging(false);
     touchDirectionRef.current = null;
   };
 
@@ -199,6 +193,29 @@ export default function ArtGallerySection({ onSelectArtwork }) {
             ART GALLERY
           </h2>
           <div className="w-16 h-[2.5px] bg-[#C87A38] mx-auto rounded-full mt-1.5" />
+          <p className="text-xs xs:text-sm sm:text-base text-[#5C5652] leading-relaxed max-w-2xl mx-auto font-light pt-1">
+            Browse original hand-painted Madhubani canvases across classical traditions.
+          </p>
+        </div>
+
+        {/* 🎨 CATEGORY FILTER PILLS (Responsive horizontal strip with smooth snap & touch-scroll) */}
+        <div className="flex items-center justify-start sm:justify-center gap-1.5 xs:gap-2 overflow-x-auto no-scrollbar py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0">
+          {categories.map((cat) => {
+            const isActive = filterStyle === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setFilterStyle(cat)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap min-h-[38px] flex items-center cursor-pointer select-none active:scale-95 ${
+                  isActive
+                    ? 'bg-[#1C1917] text-white shadow-sm border border-[#1C1917]'
+                    : 'bg-[#FFFDF9] text-[#78716C] hover:text-[#1C1917] border border-[#E7E0D2] hover:border-[#C87A38]/50 active:bg-[#F3EFE6]'
+                }`}
+              >
+                <span>{cat}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* 📍 CONTINUOUS SLOW MOVING TRACK (SIDE HOLDABLE < AND > BUTTONS FOR PC, TOUCH SWIPE FOR MOBILE) */}
@@ -207,6 +224,8 @@ export default function ArtGallerySection({ onSelectArtwork }) {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseEnter={() => { isHoveredRef.current = true; }}
+          onMouseLeave={() => { isHoveredRef.current = false; }}
         >
             {/* Holdable Left Side Button (<) - Desktop/Tablet */}
             <button
@@ -259,7 +278,7 @@ export default function ArtGallerySection({ onSelectArtwork }) {
                       onSelectArtwork(artwork);
                     }
                   }}
-                  className="w-[240px] xs:w-[275px] sm:w-[315px] lg:w-[330px] min-w-[240px] xs:min-w-[275px] sm:min-w-[315px] lg:min-w-[330px] shrink-0 deckled-frame bg-[#FFFDF9] border-2 border-[#E7E0D2] hover:border-[#C87A38] rounded-xl p-3 sm:p-3.5 shadow-md hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col justify-between h-[395px] xs:h-[415px] sm:h-[425px]"
+                  className="w-[230px] xxs:w-[255px] xs:w-[285px] sm:w-[315px] lg:w-[330px] min-w-[230px] xxs:min-w-[255px] xs:min-w-[285px] sm:min-w-[315px] lg:min-w-[330px] shrink-0 deckled-frame bg-[#FFFDF9] border-2 border-[#E7E0D2] hover:border-[#C87A38] rounded-xl p-3 sm:p-3.5 shadow-md hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col justify-between h-[390px] xxs:h-[400px] xs:h-[415px] sm:h-[425px]"
                 >
                   <div className="space-y-2">
                     
@@ -269,6 +288,8 @@ export default function ArtGallerySection({ onSelectArtwork }) {
                         <img
                           src={artwork.image}
                           alt={artwork.title}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
                         />
                       </div>

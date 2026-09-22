@@ -1,6 +1,6 @@
 import { Calendar, MapPin, Sparkles, ArrowRight } from 'lucide-react';
 
-export default function ExhibitionsSection({ onInquireExhibition, onSelectArtwork }) {
+export default function ExhibitionsSection({ onInquireExhibition, _onSelectArtwork }) {
   return (
     <section id="exhibitions" className="pt-5 sm:pt-7 lg:pt-8 pb-7 sm:pb-9 lg:pb-10 bg-transparent relative overflow-hidden border-b border-[#E7E0D2] scroll-mt-20 sm:scroll-mt-24">
       {/* Decorative Spotlights */}
@@ -27,6 +27,8 @@ export default function ExhibitionsSection({ onInquireExhibition, onSelectArtwor
             <img
               src="/images/ihc_visual_art_gallery.jpg"
               alt="Visual Arts Gallery, India Habitat Centre (IHC), New Delhi"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
 

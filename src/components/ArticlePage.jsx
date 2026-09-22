@@ -195,6 +195,8 @@ export default function ArticlePage() {
               <img
                 src={article.image}
                 alt={article.title}
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-[center_28%]"
               />
             </div>
@@ -258,6 +260,8 @@ export default function ArticlePage() {
                       <img
                         src={rel.image}
                         alt={rel.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>

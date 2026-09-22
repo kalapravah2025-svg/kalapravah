@@ -190,3 +190,29 @@ html {
   }
 }
 
+/* Hide scrollbar for clean horizontal chip navigation */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* GPU acceleration for smooth 60-120fps scrolling on mobile/tablets */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Smooth active tap states for touch devices */
+@media (hover: none) {
+  .touch-tap:active {
+    opacity: 0.85;
+    transform: scale(0.98);
+  }
+}
+

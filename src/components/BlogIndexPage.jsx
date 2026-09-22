@@ -120,6 +120,8 @@ export default function BlogIndexPage() {
                     <img
                       src={article.image}
                       alt={article.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                     />
                     <span className="absolute bottom-2.5 left-2.5 bg-[#1C1917]/85 backdrop-blur-md text-white text-[9px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase">

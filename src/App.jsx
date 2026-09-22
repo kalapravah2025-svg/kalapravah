@@ -26,7 +26,7 @@ function MainPage() {
       setTimeout(() => {
         const elem = document.getElementById(targetId);
         if (elem) {
-          const navOffset = 84;
+          const navOffset = window.innerWidth < 640 ? 64 : window.innerWidth < 1024 ? 76 : 88;
           const elementPosition = elem.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navOffset;
           window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -75,7 +75,7 @@ function MainPage() {
     setActiveSection(id);
     const elem = document.getElementById(id);
     if (elem) {
-      const navOffset = 84;
+      const navOffset = window.innerWidth < 640 ? 64 : window.innerWidth < 1024 ? 76 : 88;
       const elementPosition = elem.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navOffset;
 

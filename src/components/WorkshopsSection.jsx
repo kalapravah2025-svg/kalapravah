@@ -276,11 +276,13 @@ export default function WorkshopsSection({ onSelectArtwork, onBookWorkshop }) {
                         });
                       }
                     }}
-                    className="w-44 xs:w-56 sm:w-68 md:w-72 aspect-[4/3] shrink-0 bg-[#FAF8F3] border border-[#E7E0D2] hover:border-[#C87A38] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group relative cursor-pointer"
+                    className="w-40 xxs:w-48 xs:w-56 sm:w-68 md:w-72 aspect-[4/3] shrink-0 bg-[#FAF8F3] border border-[#E7E0D2] hover:border-[#C87A38] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group relative cursor-pointer active:scale-98"
                   >
                     <img 
                       src={item.image} 
                       alt="Workshop photo" 
+                      loading="lazy"
+                      decoding="async"
                       style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
