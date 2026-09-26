@@ -3,7 +3,6 @@ import { ARTWORKS } from '../data/artworks';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 export default function ArtGallerySection({ onSelectArtwork }) {
-  const [filterStyle, setFilterStyle] = useState('All');
   const [scrollPos, setScrollPos] = useState(0);
 
   const [hasDraggedFar, setHasDraggedFar] = useState(false);
@@ -22,21 +21,9 @@ export default function ArtGallerySection({ onSelectArtwork }) {
   const touchStartYRef = React.useRef(0);
   const touchDirectionRef = React.useRef(null);
 
-  const categories = ['All', 'Bharni', 'Kachni', 'Godna', 'Traditional'];
-
-  const filteredArtworks = ARTWORKS.filter(item => {
-    if (filterStyle === 'All') return true;
-    const cat = item.styleCategory.toLowerCase();
-    const target = filterStyle.toLowerCase();
-    if (target === 'kachni') {
-      return cat.includes('kachni') || cat.includes('katchni');
-    }
-    return cat.includes(target);
-  });
-
   // Triple-cloned array for seamless infinite marquee scrolling in both directions
-  const displayArtworks = filteredArtworks.length > 0 
-    ? [...filteredArtworks, ...filteredArtworks, ...filteredArtworks] 
+  const displayArtworks = ARTWORKS.length > 0 
+    ? [...ARTWORKS, ...ARTWORKS, ...ARTWORKS] 
     : [];
 
   // Helper to calculate exact card width + gap dynamically
@@ -69,12 +56,6 @@ export default function ArtGallerySection({ onSelectArtwork }) {
     scrollPosRef.current = pos;
     setScrollPos(pos);
   };
-
-  // Reset scrollPos if filter category changes
-  useEffect(() => {
-    targetScrollPosRef.current = null;
-    updateScrollPos(0);
-  }, [filterStyle]);
 
   // Continuous linear movement & smooth card-by-card navigation
   useEffect(() => {
@@ -111,7 +92,7 @@ export default function ArtGallerySection({ onSelectArtwork }) {
     return () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
-  }, [isHoldingLeft, isHoldingRight, filteredArtworks.length]);
+  }, [isHoldingLeft, isHoldingRight]);
 
   // 1:1 Incremental Touch Drag Handlers with vertical scroll passthrough
   const handleTouchStart = (e) => {
@@ -193,29 +174,6 @@ export default function ArtGallerySection({ onSelectArtwork }) {
             ART GALLERY
           </h2>
           <div className="w-16 h-[2.5px] bg-[#C87A38] mx-auto rounded-full mt-1.5" />
-          <p className="text-xs xs:text-sm sm:text-base text-[#5C5652] leading-relaxed max-w-2xl mx-auto font-light pt-1">
-            Browse original hand-painted Madhubani canvases across classical traditions.
-          </p>
-        </div>
-
-        {/* 🎨 CATEGORY FILTER PILLS (Responsive horizontal strip with smooth snap & touch-scroll) */}
-        <div className="flex items-center justify-start sm:justify-center gap-1.5 xs:gap-2 overflow-x-auto no-scrollbar py-1 px-1 -mx-4 sm:mx-0 px-4 sm:px-0">
-          {categories.map((cat) => {
-            const isActive = filterStyle === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setFilterStyle(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap min-h-[38px] flex items-center cursor-pointer select-none active:scale-95 ${
-                  isActive
-                    ? 'bg-[#1C1917] text-white shadow-sm border border-[#1C1917]'
-                    : 'bg-[#FFFDF9] text-[#78716C] hover:text-[#1C1917] border border-[#E7E0D2] hover:border-[#C87A38]/50 active:bg-[#F3EFE6]'
-                }`}
-              >
-                <span>{cat}</span>
-              </button>
-            );
-          })}
         </div>
 
         {/* 📍 CONTINUOUS SLOW MOVING TRACK (SIDE HOLDABLE < AND > BUTTONS FOR PC, TOUCH SWIPE FOR MOBILE) */}
